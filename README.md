@@ -1,4 +1,4 @@
-#Influx-MQTT-Grafana Stack for ESP8266-Sensor
+# Influx-MQTT-Grafana Stack for ESP8266-Sensor
 
 
 Docker-Compose Stack with a InfluxDB and MQTT-Server (Mosquitto) and Grafana for monitoring the data. In this project, an ESP8266 was used to measure **temperature** and **humidity** using DHT and **air quality** (PM 10 and PM 2.5) using SDS011. The code for the ESP can be found in the "sensor" directory.
@@ -8,14 +8,14 @@ The picture below shows how all the components work together.
 ![diagram](./diagram.png?raw=true "diagram")
 
 ---
-#Setup
+# Setup
 For the complete stack to work reasonably, it must first be configured.
 The following steps must be followed:
 
-###Step 1: Start docker compose
+### Step 1: Start docker compose
 - run ```docker-compose up``` in this directory
 
-###Step 2: Mosquitto configuration:
+### Step 2: Mosquitto configuration:
 - add the *mosquitto.conf* (see below) config to ./mosquitto/config/mosquitto.conf
 - create the user "admin" and "guest"
   1. ```docker exec -it {MOS_CONTAINER} sh```
@@ -49,22 +49,22 @@ topic read {TOPIC_NAME}
 ```
 
 
-###Step 3: Influx configuration:
+### Step 3: Influx configuration:
 1. open {host}:8086 in browser
 2. create a user
 3. create a bucket
 
-###Step 4: Add environmental variables to *docker-compose.yml*
+### Step 4: Add environmental variables to *docker-compose.yml*
 1. MQTT_USER and MQTT_PASS are the created guest user with the password
 2. MQTT_TOPIC is the topic you want to write data to
 3. Add the Influx organization and bucket you created in step 3
 4. add the influx token, to give the mqtt-bridge permission to write
    - can be found in the influx-dashboard (data -> API Tokens)
 
-###Step 5: Restart docker-compose
+### Step 5: Restart docker-compose
 - run ```docker-compose restart```
 
-###Step 6: Configure Grafana
+### Step 6: Configure Grafana
 To display the data in grafana you need to your influxdb as datasource
 1. open grafana in your browser (on port 3000)
 2. configuration -> Data sources -> Add data source
